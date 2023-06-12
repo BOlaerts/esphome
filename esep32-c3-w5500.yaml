@@ -1,0 +1,52 @@
+esphome:
+  name: "esp32-c3-w5500"
+  friendly_name: ESPHome C3 Ethernet W5500
+  platformio_options:
+    board_build.flash_mode: dio
+    board_build.mcu: esp32c3
+    board_build.f_cpu: 160000000L
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+    baud_rate: 0
+
+ota:
+
+web_server:
+  port: 80
+
+external_components:
+  - source: github://BOlaerts/esphome@main
+    components: [ethernet]
+    refresh: 0s
+
+ethernet:
+  type: W5500
+  cs_pin: 0
+  clk_pin: 1
+  mosi_pin: 2
+  miso_pin: 3
+  interrupt_pin: 4
+  clock_speed: 25
+
+i2c:
+  sda: 6
+  scl: 7
+  scan: true
+  id: bus_a
+
+switch:
+  # Switch to restart
+  - platform: restart
+    name: "ESP32C3 Restart"
+
+sensor:
+  - platform: bh1750
+    name: "BH1750 Illuminance"
+    address: 0x23
+    update_interval: 5s
