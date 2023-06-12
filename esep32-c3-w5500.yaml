@@ -15,6 +15,13 @@ esp32:
 logger:
     baud_rate: 0
 
+# MQTT
+mqtt:
+  broker: 192.168.0.2
+  username: ****
+  password: ****
+  topic_prefix: esp32-c3-w5500
+
 ota:
 
 web_server:
